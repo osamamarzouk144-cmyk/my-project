@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. سحب الكود من الريبو عندك
+    # 1. سحب الكود من الريبو عندك على GitHub
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 2. تسجيل الدخول على حسابك في Docker Hub
+    # 2. تسجيل الدخول على حسابك في Docker Hub باستخدام الـ Secrets
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # 3. بناء الـ Docker Image ورفعها مباشرة
+    # 3. بناء الـ Docker Image ورفعها مباشرة بالحساب والـ Slash الصح
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
