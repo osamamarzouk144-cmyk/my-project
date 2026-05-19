@@ -3,29 +3,24 @@ name: Docker CI CD Pipeline
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. سحب الكود من الريبو بتاعك
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 2. تسجيل الدخول بحسابك النظيف اللي اتظبط خلاص
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # 3. بناء الـ Docker Image ورفعها على حسابك إنت (osos1212)
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-java-app:latest
+        tags: osos1212/my-java-app:latest
